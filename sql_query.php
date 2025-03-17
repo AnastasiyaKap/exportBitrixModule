@@ -43,9 +43,10 @@
                                 LAST_NAME, EMAIL, UF_DEPARTMENT, WORK_POSITION)
                                 VALUES(?, ?, ?, ?, ?, ?, ?)');
 
-    // SQL query for add users of web-site
+    // SQL query for get users from DB
     $id_user = $conn->query('SELECT SQL_NO_CACHE * FROM users ORDER BY ID asc');
-
+    
+    // SQL query for update infromation of users
     $update_user = $conn->prepare('UPDATE users SET NAME = ?, SECOND_NAME = ?,
                                     LAST_NAME = ?, EMAIL = ?, UF_DEPARTMENT = ?, WORK_POSITION = ? WHERE ID = ?');
 ?>

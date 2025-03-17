@@ -66,6 +66,8 @@
     $stages_array = getStages($id_db, $url_stages, $arrContextOptions);
     $all_stages_db = getStageDb($stages_db);
 
+    // if DB is empty, need to add all stages
+    // else add other stages and update current stages
     for($i = 0; $i < count($stages_array); $i++){
         $choose_stages_db->bind_param('ss', $stages_array[$i]['ID'], $stages_array[$i]['GROUP_ID']);
         $choose_stages_db->execute();        

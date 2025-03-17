@@ -5,7 +5,7 @@
     $method_user = 'user.get';
     $url_users = $url . $method_user;
 
-
+    //function for get users from Bitrix
     function getUser($url_users, $arrContextOptions){
         $url_user = file_get_contents($url_users, false, stream_context_create($arrContextOptions));
         $url_user = json_decode($url_user, TRUE);
@@ -28,7 +28,7 @@
         return($res);
     }
 
-
+    //function for add users from DB
     function addUser($users_array, $add_user){
         $add_user->bind_param('sssssss',
                     $users_array['ID'],
@@ -59,7 +59,7 @@
         return($user_id_db);
     }
 
-
+    //function for update users from DB
     function updateUsers($users_array, $update_user){
         $update_user->bind_param('sssssss',
                         $users_array['NAME'],
@@ -75,8 +75,9 @@
 
     $users_db = getUsersDb($id_user);
     $users_array = getUser($url_users, $arrContextOptions);
-    print_r($users_array);
 
+    // if DB is empty, need to add all users
+    // else add other users and update current users
     if(empty($users_db)){
         print_r('Users are empty. Added new users');
 
@@ -112,7 +113,6 @@
             }
         }     
         
-    
         $result = $conn->query('SELECT * FROM users ORDER BY ID desc');
         $users_db_new = [];
         while ($row = $result ->fetch_assoc()){
@@ -131,8 +131,6 @@
             }
         }
 
-        print_r($users_db_new);
-
         for($i = 0; $i < count($new_array_user); $i++){
             if($new_array_user[$i]['NAME'] != $users_db_new[$i]['NAME'] |
                 $new_array_user[$i]['EMAIL'] != $users_db_new[$i]['EMAIL'] |
@@ -145,5 +143,7 @@
             }
         }
     }
+
+    print_r("\n" ."All users added or updated". " ". date('d.m.Y h:i:s', time()));
 
 ?>
