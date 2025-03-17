@@ -62,13 +62,13 @@
 
     function updateUsers($users_array, $update_user){
         $update_user->bind_param('sssssss',
-                        $users_array['ID'],
                         $users_array['NAME'],
                         $users_array['SECOND_NAME'],
                         $users_array['LAST_NAME'],
                         $users_array['EMAIL'],
                         $users_array['UF_DEPARTMENT'],
                         $users_array['WORK_POSITION'],
+                        $users_array['ID'],
                     );
         $update_user->execute();
     }
@@ -91,8 +91,7 @@
                 addUser($user, $add_user);
             }
         }
-    }
-    // else{
+    }else{
         print_r("Groups aren't empty. Added missing groups and updated all groups");
 
         for($i = 0; $i <count($users_db); $i++){
@@ -114,21 +113,37 @@
         }     
         
     
-        // $result = $conn->query('SELECT * FROM projects ORDER BY ID desc');
-        // $groups_db_new = [];
-        // while ($row = $result ->fetch_assoc()){
-        //     $groups_db_new[] = $row;
-        // }
+        $result = $conn->query('SELECT * FROM users ORDER BY ID desc');
+        $users_db_new = [];
+        while ($row = $result ->fetch_assoc()){
+            $users_db_new[] = $row;
+        }
 
-        // for($i = 0; $i < count($groups_array['0']); $i++){
-        //         if($groups_array['0'][$i]['NAME'] != $groups_db_new[$i]['NAME'] |
-        //             $groups_array['0'][$i]['DESCRIPTION'] != $groups_db_new[$i]['DESCRIPTION'] |
-        //             $groups_array['0'][$i]['CLOSED'] != $groups_db_new[$i]['CLOSED']|
-        //             $groups_array['0'][$i]['KEYWORDS'] != $groups_db_new[$i]['KEYWORDS']){
-                    
-        //                 updateGroups($groups_array['0'][$i], $update_group);
-        //         }
-        // }
+        foreach($users_array as $user_array){
+            foreach($user_array as $user){
+                $depart = '';
+                foreach($user['UF_DEPARTMENT'] as $departament){
+                    $depart .= $departament . ';';
+                }
+                $depart = substr($depart, 0, -1);
+                $user['UF_DEPARTMENT'] = $depart;
+                $new_array_user[] = $user;
+            }
+        }
+
+        print_r($users_db_new);
+
+        for($i = 0; $i < count($new_array_user); $i++){
+            if($new_array_user[$i]['NAME'] != $users_db_new[$i]['NAME'] |
+                $new_array_user[$i]['EMAIL'] != $users_db_new[$i]['EMAIL'] |
+                $new_array_user[$i]['WORK_POSITION'] != $users_db_new[$i]['WORK_POSITION']|
+                $new_array_user[$i]['UF_DEPARTMENT'] != $users_db_new[$i]['UF_DEPARTMENT']|
+                $new_array_user[$i]['LAST_NAME'] != $users_db_new[$i]['LAST_NAME']|
+                $new_array_user[$i]['SECOND_NAME'] != $users_db_new[$i]['SECOND_NAME']){
+        
+                updateUsers($new_array_user[$i], $update_user);
+            }
+        }
     }
 
 ?>

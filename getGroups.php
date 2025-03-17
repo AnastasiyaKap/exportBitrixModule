@@ -121,7 +121,6 @@
 
         foreach($groups_array as $group_array){
             foreach($group_array as $group){
-
                 $new_array_group[] = $group;
             }
         }
