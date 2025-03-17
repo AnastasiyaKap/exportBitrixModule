@@ -49,7 +49,7 @@
    print_r('Начало выполнения: ' . date('d.m.Y h:i:s', time()));
 
 
-    // function getTask($select_param){
+    function getTask($select_link, $arrContextOptions, $add_task){
         $url_tasks = file_get_contents($select_link, false, stream_context_create($arrContextOptions));
         $url_tasks = json_decode($url_tasks, TRUE);
         $total = $url_tasks['total'];
@@ -109,10 +109,13 @@
                 
         }
 
+    }
+
+    getTask($select_link, $arrContextOptions, $add_task);
+
     print_r("\n");
 
     print_r('Окончание выполнения: ' . date('d.m.Y h:i:s', time()));
-    // }
 
 
 ?>
