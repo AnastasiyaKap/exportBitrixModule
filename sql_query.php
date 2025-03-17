@@ -37,5 +37,11 @@
                                 UF_AUTO_751244333336, UF_AUTO_185560970868, UF_AUTO_296198624958, 
                                 DATE)  
                             VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    
+    // SQL query for add users of web-site
+    $add_user = $conn->prepare('INSERT INTO users (ID, NAME, SECOND_NAME,
+                                LAST_NAME, EMAIL, UF_DEPARTMENT, WORK_POSITION)
+                                VALUES(?, ?, ?, ?, ?, ?, ?)');
 
+    $id_user = $conn->query('SELECT SQL_NO_CACHE * FROM users ORDER BY ID asc');
 ?>

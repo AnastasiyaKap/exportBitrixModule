@@ -92,8 +92,10 @@
     if(empty($groups_db)){
         print_r('Groups are empty. Added new groups');
 
-        for($i = 0; $i < count($groups_array['0']); $i++){
-            addGroups($groups_array['0'][$i], $add_group);
+        foreach($groups_array as $group_array){
+            foreach($group_array as $group){
+                addGroups($group, $add_group);
+            }
         }
 
     }else{
@@ -103,9 +105,11 @@
             $id_db[]= $groups_db[$i]['ID'];
         }
         
-        for($i = 0; $i < count($groups_array['0']); $i++){
-            if(!in_array($groups_array['0'][$i]['ID'], $id_db)){
-                addGroups($groups_array['0'][$i], $add_group);
+        foreach($groups_array as $group_array){
+            foreach($group_array as $group){
+                if(!in_array($group['ID'], $id_db)){
+                    addGroups($group, $add_group);
+                }
             }
         }
     
@@ -115,14 +119,21 @@
             $groups_db_new[] = $row;
         }
 
-        for($i = 0; $i < count($groups_array['0']); $i++){
-                if($groups_array['0'][$i]['NAME'] != $groups_db_new[$i]['NAME'] |
-                    $groups_array['0'][$i]['DESCRIPTION'] != $groups_db_new[$i]['DESCRIPTION'] |
-                    $groups_array['0'][$i]['CLOSED'] != $groups_db_new[$i]['CLOSED']|
-                    $groups_array['0'][$i]['KEYWORDS'] != $groups_db_new[$i]['KEYWORDS']){
-                    
-                        updateGroups($groups_array['0'][$i], $update_group);
-                }
+        foreach($groups_array as $group_array){
+            foreach($group_array as $group){
+
+                $new_array_group[] = $group;
+            }
+        }
+
+        for($i = 0; $i < count($new_array_group); $i++){
+            if($new_array_group[$i]['NAME'] != $groups_db_new[$i]['NAME'] |
+                $new_array_group[$i]['DESCRIPTION'] != $groups_db_new[$i]['DESCRIPTION'] |
+                $new_array_group[$i]['CLOSED'] != $groups_db_new[$i]['CLOSED']|
+                $new_array_group[$i]['KEYWORDS'] != $groups_db_new[$i]['KEYWORDS']){
+        
+                updateGroups($new_array_group[$i], $update_group);
+            }
         }
     }
     print_r("\n" ."All groups added or updated". " ". date('d.m.Y h:i:s', time()));
