@@ -28,6 +28,7 @@
     // SQL query for update stages of projects
     $update_stage = $conn->prepare('UPDATE stagescache SET TITLE = ? WHERE ID = ?');
 
+    // SQL query for add tasks of projects
     $add_task = $conn->prepare('INSERT INTO tasks (ID, PARENT_ID, TITLE, DESCRIPTION,
                                 STATUS, GROUP_ID, STAGE_ID, CREATOR_ID, CREATED_NAME,
                                 CREATED_DATE, RESPONSIBLE_ID, RESPONSIBLE_NAME, 
@@ -36,32 +37,5 @@
                                 UF_AUTO_751244333336, UF_AUTO_185560970868, UF_AUTO_296198624958, 
                                 DATE)  
                             VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-
-    // $all_group_id = "SELECT groupId FROM projects"; 
-
-
-    // $check_group = $conn->query('SELECT DISTINCT groupId FROM stagescache');
-
-    // $update_stage = $conn->prepare('UPDATE stagescache SET title = ? WHERE id = ?');
-
-    // $id_group = $conn->query('SELECT groupId FROM projects');
-
-
-
-    // $update_group = $conn->prepare('UPDATE projects SET title = ?, owner_id = ?, about = ?,
-    //                         date_create = ?, date_update = ?, active = ?, visible = ?, opened = ?, 
-    //                         archive = ?, keywords = ?, count_members = ? WHERE groupId = ?');
-
-    // $tasks_id = $conn->query("SELECT DISTINCT id FROM tasks");
-
-    // $add_history = $conn->prepare('INSERT INTO stattasks (idTask, idHistory, createdDate,
-    //                             field, valueFrom, valueTo, userName, userLastName, userSecondName, login, timestamp)  
-    //                             VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'); 
-
-    // $id_user = $conn->query('SELECT userId FROM users');
-    // $add_user = $conn->prepare('INSERT INTO users (userId, name, secondName, 
-    //                             lastName, email, department, workPosition)  
-    //                             VALUES(?, ?, ?, ?, ?, ?, ?)'); 
-    // $update_users = $conn->prepare('UPDATE users SET lastName = ?, email = ?, department = ?, workPosition = ? WHERE userId = ?');
 
 ?>

@@ -14,7 +14,7 @@
              '&select[]=UF_AUTO_185560970868&select[]=UF_AUTO_296198624958';
 
 
-
+    // function for add tasks to DB
    function addTask($task_array, $add_task){
         $add_task->bind_param('sssssssssssssssssssssss',
                 $task_array['id'],
@@ -46,10 +46,10 @@
 
    }
 
-   print_r('Начало выполнения: ' . date('d.m.Y h:i:s', time()));
+   print_r('Start download tasks: ' . date('d.m.Y h:i:s', time()));
 
-
-    function getTask($select_link, $arrContextOptions, $add_task){
+    // function for get tasks from Bitrix and add to DB
+    function getImportTask($select_link, $arrContextOptions, $add_task){
         $url_tasks = file_get_contents($select_link, false, stream_context_create($arrContextOptions));
         $url_tasks = json_decode($url_tasks, TRUE);
         $total = $url_tasks['total'];
@@ -111,11 +111,11 @@
 
     }
 
-    getTask($select_link, $arrContextOptions, $add_task);
+    getImportTask($select_link, $arrContextOptions, $add_task);
 
     print_r("\n");
 
-    print_r('Окончание выполнения экспорта: ' . date('d.m.Y h:i:s', time()));
+    print_r('End download tasks: ' . date('d.m.Y h:i:s', time()));
 
 
 ?>
