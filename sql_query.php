@@ -46,7 +46,17 @@
     // SQL query for get users from DB
     $id_user = $conn->query('SELECT SQL_NO_CACHE * FROM users ORDER BY ID asc');
     
-    // SQL query for update infromation of users
+    // SQL query for update information of users
     $update_user = $conn->prepare('UPDATE users SET NAME = ?, SECOND_NAME = ?,
                                     LAST_NAME = ?, EMAIL = ?, UF_DEPARTMENT = ?, WORK_POSITION = ? WHERE ID = ?');
+
+    // SQL query for add information of department
+    $add_dprt = $conn->prepare('INSERT INTO department (ID, NAME, PARENT)
+                                    VALUES(?, ?, ?)');
+
+    // SQL query for update information of department
+    $update_dprt = $conn->prepare('UPDATE department SET NAME = ?, PARENT = ? WHERE ID = ?');
+
+    // SQL query for get information of department
+    $id_dprt = $conn->query('SELECT SQL_NO_CACHE * FROM department');
 ?>

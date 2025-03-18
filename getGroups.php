@@ -2,7 +2,6 @@
     include 'settings.php';
     include 'sql_query.php';
 
-
     $method_group = 'sonet_group.get';
     $url_group = $url . $method_group;
 
