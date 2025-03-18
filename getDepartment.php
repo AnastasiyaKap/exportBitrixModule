@@ -107,7 +107,7 @@
         for($i = 0; $i < count($new_array_dprts); $i++){
             if($new_array_dprts[$i]['NAME'] != $dprtmnts_db_new[$i]['NAME'] |
                 $new_array_dprts[$i]['PARENT'] != $dprtmnts_db_new[$i]['PARENT']){
-                    updateGroups($new_array_dprts[$i], $update_dprt);
+                    updateDepartament($new_array_dprts[$i], $update_dprt);
             }
         }
 
